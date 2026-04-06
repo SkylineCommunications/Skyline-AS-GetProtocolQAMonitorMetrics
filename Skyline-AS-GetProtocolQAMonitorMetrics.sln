@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.12.35707.178 d17.12
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Skyline-AS-GetProtocolQAMonitorMetrics", "Skyline-AS-GetProtocolQAMonitorMetrics\Skyline-AS-GetProtocolQAMonitorMetrics.csproj", "{5BF81617-CD4A-44BF-A934-51A8B9EC5031}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Internal", "Internal", "{16B5C556-A3A7-4A28-A4F6-5DA589574CBD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Code Analysis", "Code Analysis", "{7D5FDF93-1E31-4AE5-A3AC-2B528838A48C}"
+	ProjectSection(SolutionItems) = preProject
+		Internal\Code Analysis\qaction-debug.ruleset = Internal\Code Analysis\qaction-debug.ruleset
+		Internal\Code Analysis\qaction-release.ruleset = Internal\Code Analysis\qaction-release.ruleset
+		Internal\Code Analysis\stylecop.json = Internal\Code Analysis\stylecop.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5BF81617-CD4A-44BF-A934-51A8B9EC5031}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5BF81617-CD4A-44BF-A934-51A8B9EC5031}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5BF81617-CD4A-44BF-A934-51A8B9EC5031}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5BF81617-CD4A-44BF-A934-51A8B9EC5031}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7D5FDF93-1E31-4AE5-A3AC-2B528838A48C} = {16B5C556-A3A7-4A28-A4F6-5DA589574CBD}
+	EndGlobalSection
+EndGlobal

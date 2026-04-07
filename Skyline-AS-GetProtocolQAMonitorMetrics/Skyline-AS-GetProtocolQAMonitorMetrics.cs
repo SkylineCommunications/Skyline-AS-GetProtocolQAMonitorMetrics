@@ -54,23 +54,45 @@ namespace SkylineASGetProtocolQAMonitorMetrics
 
 			List<ProtocolVersion> protocolVersions = protocolVersionRows.GetColumns(
 			new uint[] { 0, 1, 2, 3, 4, 5, 6, 23, 19, 22, 13, 21, 14, 25 },
-			values => new ProtocolVersion
-			{
-				ID = Convert.ToString(values[0]),
-				Name = Convert.ToString(values[1]),
-				Version = Convert.ToString(values[2]),
-				Branch = Convert.ToString(values[3]),
-				Vendor = Convert.ToString(values[4]),
-				Tagger = Convert.ToString(values[5]),
-				ReleaseDate = DateTime.FromOADate(Convert.ToDouble(values[6])),
-				BasedOnVersion = Convert.ToString(values[7]),
-				QualityScore = Convert.ToDouble(values[8], System.Globalization.CultureInfo.InvariantCulture),
-				QualityScoreDelta = Convert.ToDouble(values[9], System.Globalization.CultureInfo.InvariantCulture),
-				UnitTests = Convert.ToDouble(values[10], System.Globalization.CultureInfo.InvariantCulture),
-				UnitTestsDelta = Convert.ToDouble(values[11], System.Globalization.CultureInfo.InvariantCulture),
-				UnitTestsCoverage = Convert.ToDouble(values[12]),
-				TaskIds = Convert.ToString(values[13]).Split(';').ToList(),
-			});
+			 values => new ProtocolVersion
+			 {
+				 ID = Convert.ToString(values[0]),
+				 Name = Convert.ToString(values[1]),
+				 Version = Convert.ToString(values[2]),
+				 Branch = Convert.ToString(values[3]),
+				 Vendor = Convert.ToString(values[4]),
+				 Tagger = Convert.ToString(values[5]),
+				 ReleaseDate = DateTime.FromOADate(Convert.ToDouble(values[6])),
+				 BasedOnVersion = Convert.ToString(values[7]),
+				 QualityScore = Convert.ToDouble(values[8], System.Globalization.CultureInfo.InvariantCulture),
+				 QualityScoreDelta = Convert.ToDouble(values[9], System.Globalization.CultureInfo.InvariantCulture),
+				 UnitTests = Convert.ToDouble(values[10], System.Globalization.CultureInfo.InvariantCulture),
+				 UnitTestsDelta = Convert.ToDouble(values[11], System.Globalization.CultureInfo.InvariantCulture),
+				 UnitTestsCoverage = Convert.ToDouble(values[12]),
+				 TaskId = Convert.ToString(values[13]), // temporary, will be replaced
+			 })
+			.SelectMany(pv =>
+				Convert.ToString(/* raw task ids string */ pv.TaskId)
+					.Split(';')
+					.Where(id => !string.IsNullOrWhiteSpace(id))
+					.Select(taskId => new ProtocolVersion
+					{
+						ID = pv.ID,
+						Name = pv.Name,
+						Version = pv.Version,
+						Branch = pv.Branch,
+						Vendor = pv.Vendor,
+						Tagger = pv.Tagger,
+						ReleaseDate = pv.ReleaseDate,
+						BasedOnVersion = pv.BasedOnVersion,
+						QualityScore = pv.QualityScore,
+						QualityScoreDelta = pv.QualityScoreDelta,
+						UnitTests = pv.UnitTests,
+						UnitTestsDelta = pv.UnitTestsDelta,
+						UnitTestsCoverage = pv.UnitTestsCoverage,
+						TaskId = taskId.Trim(),
+					}))
+			.ToList();
 
 			return protocolVersions;
 		}
@@ -117,7 +139,7 @@ namespace SkylineASGetProtocolQAMonitorMetrics
 
 		public string Tagger { get; set; }
 
-		public List<string> TaskIds { get; set; }
+		public string TaskId { get; set; }
 
 		public DateTime ReleaseDate { get; set; }
 

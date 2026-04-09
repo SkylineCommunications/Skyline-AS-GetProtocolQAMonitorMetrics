@@ -54,7 +54,7 @@ namespace SkylineASGetProtocolQAMonitorMetrics
 
 			List<ProtocolVersion> protocolVersions = protocolVersionRows.GetColumns(
 			new uint[] { 0, 1, 2, 3, 4, 5, 6, 23, 19, 22, 13, 21, 14, 25 },
-			 values => new ProtocolVersion
+			values => new ProtocolVersion
 			 {
 				 ID = Convert.ToString(values[0]),
 				 Name = Convert.ToString(values[1]),
@@ -92,6 +92,7 @@ namespace SkylineASGetProtocolQAMonitorMetrics
 						UnitTestsCoverage = pv.UnitTestsCoverage,
 						TaskId = taskId.Trim(),
 					}))
+			.Where(pv => pv.ReleaseDate.Year >= 2026)
 			.ToList();
 
 			return protocolVersions;
